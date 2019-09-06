@@ -42,7 +42,7 @@ If you have Perlbrew already installed, you should be able to start
 using Perlbrew without any additional configuration.
 
 If you do not already have Perlbrew installed, you should first run 
-the `Install Perlbrew` command before using any other commands in this
+the <kbd>Install Perlbrew</kbd> command before using any other commands in this
 module.
 
 Various commands, for configuring and utilizing Perlbrew and the associated Perl versions, are made available through the command palette.
