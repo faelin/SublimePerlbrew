@@ -1,0 +1,53 @@
+{
+	"folders":
+	[
+		{
+			"path": "."
+		}
+	],
+	"settings":
+	{
+		"LSP":
+		{
+			"perl (monastery)":
+			{
+				"command":
+				[
+					"monastery"
+				],
+				"enabled": true,
+				"languageId": "perl",
+				"scopes":
+				[
+					"source.perl"
+				],
+				"syntaxes":
+				[
+					"Packages/ModernPerl/ModernPerl.tmLanguage",
+					"Packages/Perl/Perl.sublime-syntax"
+				]
+			},
+			"pyls":
+			{
+				"enabled": true,
+				"settings":
+				{
+					"pyls":
+					{
+						"configurationSources":
+						[
+							"flake8"
+						],
+						"plugins":
+						{
+							"pyflakes":
+							{
+								"enabled": false
+							}
+						}
+					}
+				}
+			},
+		}
+	}
+}

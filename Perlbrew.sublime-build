@@ -1,0 +1,109 @@
+{
+    "selector": "source.perl",
+    "file_patterns": ["*.pl", "*.pm", "*.pod", "*.t"],
+    "file_regex": "(?=.*? at (.+?) line (\\d+)[,.])()(.*?) at \\1 line \\2",
+    "quiet": true,
+
+    "linux":
+    {
+        "shell_cmd": "if ! which -s perlbrew; then printf \"\\n> Perlbrew installation not found! You might need to install it:\\n\\n\\t curl -L https://install.perlbrew.pl | bash\\n\\n> Continuing with System Perl:\\n\"; elif ! perlbrew use; then echo \"> No Perl installations found under Perlbrew! Continuing with System Perl:\"; fi; echo \"------------------------------\"; perl -w $file",
+        // elif ! perlbrew use \\$(perlbrew list | head -n1 | tr -d '[[:space:]*]') 2>/dev/null;
+    },
+    "osx":
+    {
+        "shell_cmd": "if ! which -s perlbrew; then printf \"\\n> Perlbrew installation not found! You might need to install it:\\n\\n\\t curl -L https://install.perlbrew.pl | bash\\n\\n> Continuing with System Perl:\\n\"; elif ! perlbrew use; then echo \"> No Perl installations found under Perlbrew! Continuing with System Perl:\"; fi; echo \"------------------------------\"; perl -w $file",
+        // elif ! perlbrew use \\$(perlbrew list | head -n1 | tr -d '[[:space:]*]') 2>/dev/null;
+    },
+    "windows":
+    {
+        "shell_cmd": "if (-not where -q berrybrew) { echo. & echo \\\"Berrybrew installation not found! You might need to install it:\\\" & echo. & echo \\\"    git clone https://github.com/stevieb9/berrybrew && cd berrybrew && bin\\berrybrew.exe config\\\" & echo. & echo \\\"Or see https://github.com/dnmfarrell/berrybrew for more info.\\\" & echo. & echo \\\"Continuing with System Perl:\\\" } elseif (-not berrybrew use) { echo \\\"No Perl installations found under Berrybrew! Continuing with System Perl:\\\" } & echo \\\"------------------------------\\\" & perl -w $file",
+        // elseif (-not berrybrew use (berrybrew list | select -first 1).trim() 2>out-null)
+    },
+
+    "variants":
+    [
+        {
+            "name": "with args",
+            "target": "build_system_input",
+
+            "linux":
+            {
+                "shell_cmd": "if ! which -s perlbrew; then printf \"\\n> Perlbrew installation not found! You might need to install it:\\n\\n\\t curl -L https://install.perlbrew.pl | bash\\n\\n> Continuing with System Perl:\\n\"; elif ! perlbrew use; then echo \"> No Perl installations found under Perlbrew! Continuing with System Perl:\"; fi; echo \"------------------------------\"; perl -w $file %args%", 
+                // elif ! perlbrew use %version% 2>/dev/null;
+                "input":
+                {
+                    //"version": "$(perlbrew list | head -n1 | tr -d '[[:space:]*]')",
+                    "args": "",
+                },
+            },
+            "osx":
+            {
+                "shell_cmd": "if ! which -s perlbrew; then printf \"\\n> Perlbrew installation not found! You might need to install it:\\n\\n\\t curl -L https://install.perlbrew.pl | bash\\n\\n> Continuing with System Perl:\\n\"; elif ! perlbrew use; then echo \"> No Perl installations found under Perlbrew! Continuing with System Perl:\"; fi; echo \"------------------------------\"; perl -w $file %args%", 
+                // elif ! perlbrew use %version% 2>/dev/null;
+                "input":
+                {
+                    //"version": "$(perlbrew list | head -n1 | tr -d '[[:space:]*]')",
+                    "args": "",
+                },
+            },
+            "windows":
+            {
+                "shell_cmd": "if (-not where -q berrybrew) { echo. & echo \\\"Berrybrew installation not found! You might need to install it:\\\" & echo. & echo \\\"    git clone https://github.com/stevieb9/berrybrew && cd berrybrew && bin\\berrybrew.exe config\\\" & echo. & echo \\\"Or see https://github.com/dnmfarrell/berrybrew for more info.\\\" & echo. & echo \\\"Continuing with System Perl:\\\" } elseif (-not berrybrew use) { echo \\\"No Perl installations found under Berrybrew! Continuing with System Perl:\\\" } & echo \\\"------------------------------\\\" & perl -w $file %args%",
+                // elseif (-not berrybrew use %version% 2>out-null)
+                "input":
+                {
+                    //"version": "$(berrybrew list | select -first 1).trim()",
+                    "args": "",
+                },
+            },
+        },
+        {
+            "name": "Lint",
+            "target": "build_system_input",
+
+            "linux":
+            {
+                "shell_cmd": "if ! which -s perlbrew; then printf \"\\n> Perlbrew installation not found! You might need to install it:\\n\\n\\t curl -L https://install.perlbrew.pl | bash\\n\\n> Continuing with System Perl:\\n\"; elif ! perlbrew use; then echo \"> No Perl installations found under Perlbrew! Continuing with System Perl:\"; fi; echo \"------------------------------\"; perl -wc $file", 
+                // elif ! perlbrew use %version% 2>/dev/null;
+                "input":
+                {
+                    //"version": "$(perlbrew list | head -n1 | tr -d '[[:space:]*]')"
+                },
+            },
+            "osx":
+            {
+                "shell_cmd": "if ! which -s perlbrew; then printf \"\\n> Perlbrew installation not found! You might need to install it:\\n\\n\\t curl -L https://install.perlbrew.pl | bash\\n\\n> Continuing with System Perl:\\n\"; elif ! perlbrew use; then echo \"> No Perl installations found under Perlbrew! Continuing with System Perl:\"; fi; echo \"------------------------------\"; perl -wc $file", 
+                // elif ! perlbrew use %version% 2>/dev/null;
+                "input":
+                {
+                    //"version": "$(perlbrew list | head -n1 | tr -d '[[:space:]*]')"
+                },
+            },
+            "windows":
+            {
+                "shell_cmd": "if (-not where -q berrybrew) { echo. & echo \\\"Berrybrew installation not found! You might need to install it:\\\" & echo. & echo \\\"    git clone https://github.com/stevieb9/berrybrew && cd berrybrew && bin\\berrybrew.exe config\\\" & echo. & echo \\\"Or see https://github.com/dnmfarrell/berrybrew for more info.\\\" & echo. & echo \\\"Continuing with System Perl:\\\" } elseif (-not berrybrew use) { echo \\\"No Perl installations found under Berrybrew! Continuing with System Perl:\\\" } & echo \\\"------------------------------\\\" & perl -wc $file",
+                // elseif (-not berrybrew use %version% 2>out-null)
+                "input":
+                {
+                    //"version": "$(berrybrew list | select -first 1).trim()"
+                },
+            },
+        },
+        {
+            "name": "System Perl",
+            
+            "linux":
+            {
+                "shell_cmd": "which -s perlbrew && perlbrew off; perl -w $file",
+            },
+            "osx":
+            {
+                "shell_cmd": "which -s perlbrew && perlbrew off; perl -w $file",
+            },
+            "windows":
+            {
+                "shell_cmd": "where -q berrybrew && berrybrew off & perl -w $file",
+            },
+        },
+    ],
+}
